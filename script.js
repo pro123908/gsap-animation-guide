@@ -1,3 +1,9 @@
+//Docs link https://greensock.com/get-started/
+
+//from() is used to animate elements from the values you provide to the current css values
+
+// to() is used to animate elements to the values you provide from the values they have in css
+
 // Animations in a absolute manner without any relation to each other
 
 // gsap.from(".header", { duration: 1, y: "-100%", ease: "bounce" });
@@ -23,8 +29,13 @@
 const timeline = gsap.timeline({ defaults: { duration: 1 } });
 
 timeline
-  .from(".header", { y: "-100%", ease: "bounce" })
-  .from(".link", { opacity: 0, stagger: ".5s" }) // stagger property allows you to execute animation on targeted elements in linear/asynchronous manner
+  .from(".header", {
+    y: "-100%",
+    ease: "bounce",
+    onComplete: () => console.log("Header Animation Completed"),
+  })
+  .from(".link", { opacity: 0, stagger: ".5s", ease: "steps(5)" }) // stagger property allows you to execute animation on targeted elements in linear/asynchronous manner
+  .set(".link", { fontSize: 50 }) // when you want to set properties on the element during animation
   .from(".right", { x: "-100vw", ease: "power2.in" }, 1) // 1 shows absolute delay when the timeline is started
   .from(".left", { x: "-100%" }, "<.5") // "<.5 defines the offset with the last animation , in this case this animation will start after .5s second of the last animation is started"
   .to(".footer", { y: 0, ease: "elastic" })
@@ -41,3 +52,14 @@ button.addEventListener("click", () => {
   timeline.timeScale(3);
   timeline.reverse();
 });
+
+/* 
+    Things to do
+1 Plugins
+2 Callbacks
+3 Easing functions
+3 Staggers
+4 Controlling Animations
+5 And following topics...
+
+*/
